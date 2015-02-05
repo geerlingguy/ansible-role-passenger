@@ -9,8 +9,7 @@ before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -y curl
 
-  # Remove rvm entirely.
-  - sudo gem uninstall rvm
+  # Remove ruby entirely.
   - sudo apt-get remove --purge 'ruby*'
   - sudo apt-get autoremove
   - sudo apt-get autoclean
