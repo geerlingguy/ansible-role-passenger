@@ -18,6 +18,9 @@
       with_items:
         - zlib1g-dev
         - libsqlite3-dev
+        - ruby-dev
+        - build-essential
+        - libopenssl-ruby
 
     - command: which rails
       register: rails_result
