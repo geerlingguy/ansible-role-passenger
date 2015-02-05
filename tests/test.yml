@@ -18,7 +18,8 @@
       with_items:
         - zlib1g-dev
         - libsqlite3-dev
-        - ruby-dev
+        # - ruby-dev
+        - ruby1.9.1-dev
         - build-essential
         - libopenssl-ruby
 
