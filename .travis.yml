@@ -9,6 +9,13 @@ before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -y curl
 
+  # Remove rvm entirely.
+  - sudo rvm implode
+  - sudo gem uninstall rvm
+  - sudo apt-get remove --purge 'ruby*'
+  - sudo apt-get autoremove
+  - sudo apt-get autoclean
+
 install:
   # Install Ansible.
   - pip install ansible
@@ -24,6 +31,7 @@ script:
   - "ansible-playbook -i tests/inventory tests/$SITE --syntax-check"
 
   # Run the role/playbook with ansible-playbook.
+  - "ansible-playbook -i tests/inventory tests/$SITE --connection=local --sudo"
   - "ansible-playbook -i tests/inventory tests/$SITE --connection=local --sudo"
 
   # Run the role/playbook again, checking to make sure it's idempotent.
@@ -42,3 +50,7 @@ after_failure:
   - which -a ruby
   - ruby --version
   - which rails
+  - sudo which ruby
+  - sudo which -a ruby
+  - sudo ruby --version
+  - sudo which rails

@@ -6,6 +6,8 @@
     passenger_server_name: local.example.com
     passenger_app_env: development
     passenger_app_root: /opt/demo/public
+    # First is installed via RVM, it seems.
+    # passenger_ruby: /home/travis/.rvm/rubies/ruby-1.9.3-p551/bin/ruby
     passenger_ruby: /usr/bin/ruby
 
   roles:
