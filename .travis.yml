@@ -10,7 +10,6 @@ before_install:
   - sudo apt-get install -y curl
 
   # Remove rvm entirely.
-  - sudo rvm implode
   - sudo gem uninstall rvm
   - sudo apt-get remove --purge 'ruby*'
   - sudo apt-get autoremove
