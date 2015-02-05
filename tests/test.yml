@@ -18,6 +18,7 @@
       with_items:
         - zlib1g-dev
         - libsqlite3-dev
+        - ruby-dev
 
     - command: which rails
       register: rails_result
