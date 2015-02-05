@@ -1,0 +1,7 @@
+server {
+  listen 80 default_server;
+  server_name {{ passenger_server_name }};
+  passenger_enabled on;
+  passenger_app_env {{ passenger_app_env }};
+  root {{ passenger_app_root }};
+}

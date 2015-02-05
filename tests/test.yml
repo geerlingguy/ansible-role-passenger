@@ -1,0 +1,41 @@
+---
+- hosts: localhost
+  remote_user: root
+
+  vars:
+    passenger_server_name: local.example.com
+    passenger_app_env: development
+    passenger_app_root: /opt/demo/public
+
+  roles:
+    - geerlingguy.ruby
+    - geerlingguy.nodejs
+    - ansible-role-passenger
+
+  tasks:
+    - name: Install rails dependencies.
+      apt: "name={{ item }} state=present"
+      with_items:
+        - zlib1g-dev
+        - libsqlite3-dev
+        - nodejs
+
+    - name: Install rails.
+      gem: name=rails state=present
+
+    - name: Check if Rails app exists.
+      stat: "path={{ passenger_app_root }}"
+      register: rails_app
+
+    - name: Create Rails demo app if it doesn't yet exist.
+      shell: "rails new demo chdir=/opt"
+      when: rails_app.stat.exists == false
+
+    - name: Set correct permissions on demo app.
+      file:
+        path: /opt/demo
+        owner: "{{ nginx_user }}"
+        group: "{{ nginx_user }}"
+        state: directory
+        recurse: yes
+      notify: restart nginx
