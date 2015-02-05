@@ -18,10 +18,15 @@
       with_items:
         - zlib1g-dev
         - libsqlite3-dev
-        - nodejs
+
+    - command: which rails
+      register: rails_result
+      changed_when: false
+      failed_when: false
 
     - name: Install rails.
-      gem: name=rails state=present
+      shell: gem install rails --no-ri --no-rdoc
+      when: rails_result.rc != 0
 
     - name: Check if Rails app exists.
       stat: "path={{ passenger_app_root }}"
