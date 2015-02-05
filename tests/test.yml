@@ -6,9 +6,8 @@
     passenger_server_name: local.example.com
     passenger_app_env: development
     passenger_app_root: /opt/demo/public
-    # First is installed via RVM, it seems.
-    # passenger_ruby: /home/travis/.rvm/rubies/ruby-1.9.3-p551/bin/ruby
-    passenger_ruby: /usr/bin/ruby
+    passenger_ruby: /usr/local/bin/ruby
+    ruby_install_from_source: true
 
   roles:
     - geerlingguy.ruby
@@ -22,7 +21,7 @@
         - zlib1g-dev
         - libsqlite3-dev
         # - ruby-dev
-        - ruby1.9.1-dev
+        - ruby-dev
         - build-essential
         - libopenssl-ruby
 
