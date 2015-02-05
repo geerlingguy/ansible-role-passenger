@@ -35,3 +35,10 @@ script:
 
   # Request the rails demo app homepage.
   - "curl http://localhost/"
+
+after_failure:
+  # If we failed, it's likely due to Travis environment changes.
+  - which ruby
+  - which -a ruby
+  - ruby --version
+  - which rails
