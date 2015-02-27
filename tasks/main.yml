@@ -19,7 +19,7 @@
 
 - name: Add Phusion apt repo.
   apt_repository:
-    repo: 'deb https://oss-binaries.phusionpassenger.com/apt/passenger {{ansible_distribution_release}} main'
+    repo: "{{ passenger_repo_url }}"
     state: present
     update_cache: yes
 
@@ -27,8 +27,22 @@
 - name: Install Nginx and Passenger.
   apt: "pkg={{ item }} state=installed"
   with_items:
-   - nginx-extras
-   - passenger
+    - nginx-extras
+    - passenger
+  when: passenger_enterprise_license is undefined or passenger_enterprise_license == ''
+
+- name: Install Nginx and Passenger Enterprise
+  apt: pkg={{ item }} state=present
+  with_items:
+    - nginx-extras
+    - passenger-enterprise
+  when: passenger_enterprise_license is defined and passenger_enterprise_license != ''
+
+- name: Install Passenger Enterpise license key
+  copy:
+    dest: /etc/passenger-enterprise-license
+    content: "{{ passenger_enterprise_license }}"
+  when: passenger_enterprise_license is defined and passenger_enterprise_license != ''
 
 # Nginx and passenger configuration.
 - name: Copy Nginx configuration into place.
