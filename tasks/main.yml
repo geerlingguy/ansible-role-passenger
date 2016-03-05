@@ -11,7 +11,8 @@
 # Passenger repository setup.
 - name: Add Passenger apt key.
   apt_key:
-    url: "http://keyserver.ubuntu.com/pks/lookup?op=get&fingerprint=on&search=0xAC40B2F7"
+    keyserver: keyserver.ubuntu.com
+    id: 561F9B9CAC40B2F7
     state: present
 
 - name: Add apt HTTPS capabilities.
