@@ -16,7 +16,6 @@
     - name: Ensure build dependencies are installed (Debian).
       apt: 'name="{{ item }}" state=installed'
       with_items:
-        - build-essential
         - apt-transport-https
         - sudo
         - curl
@@ -33,7 +32,6 @@
       with_items:
         - zlib1g-dev
         - libsqlite3-dev
-        - ruby-dev
 
     - command: which rails
       register: rails_result
