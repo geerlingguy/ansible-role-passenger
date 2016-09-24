@@ -16,7 +16,6 @@
       with_items:
         - build-essential
         - apt-transport-https
-        - sudo
         - curl
       when: ansible_os_family == 'Debian'
 
