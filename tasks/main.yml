@@ -26,7 +26,7 @@
 
 # Nginx and passenger installation.
 - name: Install Nginx and Passenger.
-  apt: "pkg={{ item }} state=installed"
+  apt: "pkg={{ item }} state=present"
   with_items:
    - nginx-extras
    - passenger
