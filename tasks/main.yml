@@ -22,14 +22,15 @@
   apt_repository:
     repo: 'deb https://oss-binaries.phusionpassenger.com/apt/passenger {{ansible_distribution_release}} main'
     state: present
-    update_cache: yes
+    update_cache: true
 
 # Nginx and passenger installation.
 - name: Install Nginx and Passenger.
-  apt: "pkg={{ item }} state=present"
-  with_items:
-   - nginx-extras
-   - passenger
+  apt:
+    name:
+      - nginx-extras
+      - passenger
+    state: present
 
 # Nginx and passenger configuration.
 - name: Copy Nginx configuration into place.
