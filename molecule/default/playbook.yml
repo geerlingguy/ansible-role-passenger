@@ -7,6 +7,7 @@
     passenger_server_name: local.example.test
     passenger_app_env: development
     passenger_app_root: /opt/demo/public
+    nodejs_install_npm_user: root
 
   pre_tasks:
     - name: Update apt cache.
