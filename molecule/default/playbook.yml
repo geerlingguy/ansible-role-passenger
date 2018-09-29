@@ -35,13 +35,14 @@
           - ruby-dev
         state: present
 
-    - command: which rails
+    - name: Check if Rails is already present.
+      command: which rails
       register: rails_result
       changed_when: false
       failed_when: false
 
     - name: Install rails.
-      shell: gem install rails --no-ri --no-rdoc
+      command: gem install rails --no-ri --no-rdoc
       when: rails_result.rc != 0
 
     - name: Check if Rails app exists.
@@ -49,7 +50,7 @@
       register: rails_app
 
     - name: Create Rails demo app if it doesn't yet exist.
-      shell: "rails new demo chdir=/opt"
+      command: "rails new demo chdir=/opt"
       when: rails_app.stat.exists == false
 
     - name: Set correct permissions on demo app.
