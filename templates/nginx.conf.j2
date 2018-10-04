@@ -3,6 +3,10 @@ user {{ nginx_user }};
 worker_processes {{ nginx_worker_processes }};
 pid /run/nginx.pid;
 
+{% if ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'bionic' %}
+include /etc/nginx/modules-enabled/*.conf;
+{% endif %}
+
 events {
   worker_connections {{ nginx_worker_connections }};
   # multi_accept on;
@@ -56,6 +60,7 @@ http {
 
   # include /etc/nginx/naxsi_core.rules;
 
+  {% if ansible_distribution != 'Ubuntu' or ansible_distribution_version != '18.04' %}
   ##
   # Phusion Passenger config
   ##
@@ -64,6 +69,7 @@ http {
 
   passenger_root {{ passenger_root }};
   passenger_ruby {{ passenger_ruby }};
+  {% endif %}
 
   ##
   # Virtual Host Configs
