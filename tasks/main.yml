@@ -20,7 +20,7 @@
 
 - name: Add Phusion apt repo.
   apt_repository:
-    repo: 'deb https://oss-binaries.phusionpassenger.com/apt/passenger {{ansible_distribution_release}} main'
+    repo: 'deb https://oss-binaries.phusionpassenger.com/apt/passenger {{ ansible_distribution_release }} main'
     state: present
     update_cache: true
 
