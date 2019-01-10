@@ -8,6 +8,12 @@
     nginx_user: "{{ __nginx_user }}"
   when: nginx_user is not defined
 
+# Install dirmngr (required by apt-key).
+- name: Install certificate management service.
+  apt:
+    name: dirmngr
+    state: present
+
 # Passenger repository setup.
 - name: Add Passenger apt key.
   apt_key:
