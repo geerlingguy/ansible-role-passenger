@@ -52,14 +52,15 @@
         ( ansible_distribution == 'Debian' and
           ansible_distribution_version >= '9' )
 
-- name: Ensure passenger module is enabled (Ubuntu 18.04 only).
+- name: Ensure passenger module is enabled (Ubuntu >= 18.04 or Debian >= 9).
   file:
     src: /usr/share/nginx/modules-available/mod-http-passenger.load
     dest: /etc/nginx/modules-enabled/50-mod-http-passenger.conf
     state: link
-  when:
-    - ansible_distribution == 'Ubuntu'
-    - ansible_distribution_version == '18.04'
+  when: ( ansible_distribution == 'Ubuntu' and
+        ansible_distribution_version >= '18.04' ) or
+        ( ansible_distribution == 'Debian' and
+          ansible_distribution_version >= '9' )
 
 # Nginx and passenger configuration.
 - name: Copy Nginx configuration into place.
