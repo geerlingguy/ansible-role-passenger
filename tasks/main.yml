@@ -30,25 +30,27 @@
     state: present
     update_cache: true
 
-- name: Install Nginx and Passenger (< Ubuntu 18.04 or Debian).
+- name: Install Nginx and Passenger (Ubuntu < 18.04 or Debian < 9).
   apt:
     name:
       - nginx-extras
       - passenger
     state: present
-  when: |
-    ansible_distribution != 'Ubuntu'
-    or ansible_distribution_version != '18.04'
+  when: ( ansible_distribution == 'Ubuntu' and
+        ansible_distribution_version < '18.04' ) or
+        ( ansible_distribution == 'Debian' and
+          ansible_distribution_version < '9' )
 
-- name: Install Nginx and Passenger (Ubuntu 18.04).
+- name: Install Nginx and Passenger (Ubuntu >= 18.04 or Debian >= 9).
   apt:
     name:
       - nginx
       - libnginx-mod-http-passenger
     state: present
-  when:
-    - ansible_distribution == 'Ubuntu'
-    - ansible_distribution_version == '18.04'
+  when: ( ansible_distribution == 'Ubuntu' and
+        ansible_distribution_version >= '18.04' ) or
+        ( ansible_distribution == 'Debian' and
+          ansible_distribution_version >= '9' )
 
 - name: Ensure passenger module is enabled (Ubuntu 18.04 only).
   file:
