@@ -36,6 +36,16 @@ Values for passenger configuration directives inside `nginx.conf`. These default
 
 Nginx directives.
 
+In order to install Passenger, the associated public apt key must be imported
+from `keyserver.ubuntu.com`. If target hosts cannot connect to the default HKP
+port on that keyserver (which is tcp/11371), you can try to use another port,
+e.g.:
+
+    hkp_port: 80
+
+this will make the hosts connect to the keyserver through the standard HTTP
+port.
+
 ## Dependencies
 
 None.

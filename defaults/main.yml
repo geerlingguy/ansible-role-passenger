@@ -10,3 +10,5 @@ nginx_worker_processes: "{{ ansible_processor_vcpus | default(ansible_processor_
 nginx_worker_connections: "768"
 nginx_keepalive_timeout: "65"
 nginx_remove_default_vhost: true
+
+hkp_port: 11371

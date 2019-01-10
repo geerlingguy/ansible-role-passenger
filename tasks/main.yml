@@ -17,7 +17,7 @@
 # Passenger repository setup.
 - name: Add Passenger apt key.
   apt_key:
-    keyserver: keyserver.ubuntu.com
+    keyserver: "hkp://keyserver.ubuntu.com:{{ hkp_port }}"
     id: 561F9B9CAC40B2F7
     state: present
 
