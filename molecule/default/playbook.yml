@@ -54,7 +54,7 @@
 
     - name: Create Rails demo app if it doesn't yet exist.
       command: "rails new demo chdir=/opt"
-      when: rails_app.stat.exists == false
+      when: not rails_app.stat.exists
 
     - name: Set correct permissions on demo app.
       file:
