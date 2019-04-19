@@ -56,13 +56,13 @@
 # Nginx and passenger configuration.
 - name: Copy Nginx configuration into place.
   template:
-    src: nginx.conf.j2
+    src: "{{ nginx_template }}"
     dest: /etc/nginx/nginx.conf
   notify: restart nginx
 
 - name: Configure passenger virtual host.
   template:
-    src: passenger.j2
+    src: "{{ passenger_template }}"
     dest: /etc/nginx/sites-available/passenger
   notify: restart nginx
 

@@ -36,6 +36,15 @@ Values for passenger configuration directives inside `nginx.conf`. These default
 
 Nginx directives.
 
+## Not happy with the packaged nginx or passenger template?
+
+If the default templates (`nginx.conf.j2`, `passenger.j2`) do not suit your needs, you can replace one of them (or both!) with yours. What you need to do:
+* create a `templates` directory at the same level as your playbook
+* create a `templates\my-nginx.conf.j2` file (just choose a different name from the default template)
+* in your playbook set the var `nginx_template: my-nginx.conf.j2`
+* create a `templates\my-passenger.j2` file (just choose a different name from the default template)
+* in your playbook set the var `passenger_template: my-passenger.j2`
+
 ## Dependencies
 
 None.
