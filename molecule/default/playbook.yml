@@ -8,8 +8,6 @@
     passenger_app_env: development
     passenger_app_root: /opt/demo/public
     nodejs_install_npm_user: root
-    nodejs_npm_global_packages:
-      - yarn
 
   pre_tasks:
     - name: Update apt cache.
@@ -55,7 +53,7 @@
       register: rails_app
 
     - name: Create Rails demo app if it doesn't yet exist.
-      command: "rails new demo chdir=/opt"
+      command: "rails new demo --skip-git --skip-javascript chdir=/opt"
       when: not rails_app.stat.exists
 
     - name: Set correct permissions on demo app.
