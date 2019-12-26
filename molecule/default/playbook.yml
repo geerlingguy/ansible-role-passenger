@@ -8,6 +8,8 @@
     passenger_app_env: development
     passenger_app_root: /opt/demo/public
     nodejs_install_npm_user: root
+    nodejs_npm_global_packages:
+      - yarn
 
   pre_tasks:
     - name: Update apt cache.
@@ -37,6 +39,9 @@
           - ruby-dev
           - tzdata
         state: present
+
+    - name: Install yarn.
+      include_tasks: install-yarn.yml
 
     - name: Check if Rails is already present.
       command: which rails
