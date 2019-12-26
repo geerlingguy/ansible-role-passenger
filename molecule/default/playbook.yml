@@ -47,7 +47,7 @@
       failed_when: false
 
     - name: Install rails.
-      command: gem install rails --no-ri --no-rdoc
+      command: gem install rails --no-document
       when: rails_result.rc != 0
 
     - name: Check if Rails app exists.
