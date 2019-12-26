@@ -40,9 +40,6 @@
           - tzdata
         state: present
 
-    - name: Install yarn.
-      include_tasks: install-yarn.yml
-
     - name: Check if Rails is already present.
       command: which rails
       register: rails_result
