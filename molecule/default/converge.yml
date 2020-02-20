@@ -1,0 +1,76 @@
+---
+- name: Converge
+  hosts: all
+  become: true
+
+  vars:
+    passenger_server_name: local.example.test
+    passenger_app_env: development
+    passenger_app_root: /opt/demo/public
+    nodejs_install_npm_user: root
+
+  pre_tasks:
+    - name: Update apt cache.
+      apt: update_cache=true cache_valid_time=600
+      when: ansible_os_family == 'Debian'
+
+    - name: Ensure build dependencies are installed (Debian).
+      apt:
+        name:
+          - build-essential
+          - apt-transport-https
+          - curl
+        state: present
+      when: ansible_os_family == 'Debian'
+
+  roles:
+    - role: geerlingguy.ruby
+    - role: geerlingguy.nodejs
+    - role: geerlingguy.passenger
+
+  tasks:
+    - name: Install rails dependencies.
+      apt:
+        name:
+          - zlib1g-dev
+          - libsqlite3-dev
+          - ruby-dev
+          - tzdata
+        state: present
+
+    - name: Check if Rails is already present.
+      command: which rails
+      register: rails_result
+      changed_when: false
+      failed_when: false
+
+    - name: Install rails.
+      command: gem install rails --no-document
+      when: rails_result.rc != 0
+
+    - name: Check if Rails app exists.
+      stat: "path={{ passenger_app_root }}"
+      register: rails_app
+
+    - name: Create Rails demo app if it doesn't yet exist.
+      command: "rails new demo --skip-git --skip-javascript chdir=/opt"
+      when: not rails_app.stat.exists
+
+    - name: Set correct permissions on demo app.
+      file:
+        path: /opt/demo
+        owner: "{{ nginx_user }}"
+        group: "{{ nginx_user }}"
+        state: directory
+        recurse: true
+      notify: restart nginx
+
+  post_tasks:
+    - name: Ensure Rails demo app is accessible.
+      uri:
+        url: "http://127.0.0.1/"
+        status_code: 200
+      register: result
+      until: result.status == 200
+      retries: 60
+      delay: 1
