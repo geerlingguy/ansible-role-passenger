@@ -45,7 +45,7 @@
       failed_when: false
 
     - name: Install rails.
-      command: gem install rails --no-ri --no-rdoc
+      command: gem install rails --no-document
       when: rails_result.rc != 0
 
     - name: Check if Rails app exists.
@@ -53,8 +53,8 @@
       register: rails_app
 
     - name: Create Rails demo app if it doesn't yet exist.
-      command: "rails new demo chdir=/opt"
-      when: rails_app.stat.exists == false
+      command: "rails new demo --skip-git --skip-javascript chdir=/opt"
+      when: not rails_app.stat.exists
 
     - name: Set correct permissions on demo app.
       file:

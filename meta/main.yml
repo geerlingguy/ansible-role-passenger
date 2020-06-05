@@ -2,6 +2,7 @@
 dependencies: []
 
 galaxy_info:
+  role_name: passenger
   author: geerlingguy
   description: Passenger installation for Linux/UNIX.
   company: "Midwestern Mac, LLC"
