@@ -3,7 +3,7 @@ user {{ nginx_user }};
 worker_processes {{ nginx_worker_processes }};
 pid /run/nginx.pid;
 
-{% if ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'bionic' %}
+{% if ansible_distribution == 'Ubuntu' %}
 include /etc/nginx/modules-enabled/*.conf;
 {% endif %}
 
@@ -60,7 +60,7 @@ http {
 
   # include /etc/nginx/naxsi_core.rules;
 
-  {% if ansible_distribution != 'Ubuntu' or ansible_distribution_version != '18.04' %}
+  {% if ansible_distribution != 'Ubuntu' %}
   ##
   # Phusion Passenger config
   ##
