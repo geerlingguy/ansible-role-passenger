@@ -42,6 +42,7 @@
     state: present
   when:
     - ansible_distribution == 'Ubuntu'
+    - ansible_distribution_version >= '18.04'
 
 - name: Ensure passenger module is enabled.
   file:
