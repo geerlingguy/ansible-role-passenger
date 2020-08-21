@@ -57,7 +57,7 @@
       when: not rails_app.stat.exists
 
     - name: Set correct permissions on demo app.
-      file:
+      file:  # noqa 208
         path: /opt/demo
         owner: "{{ nginx_user }}"
         group: "{{ nginx_user }}"

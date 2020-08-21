@@ -32,7 +32,7 @@
     state: present
 
 - name: Ensure passenger module is enabled.
-  file:
+  file:  # noqa 208
     src: /usr/share/nginx/modules-available/mod-http-passenger.load
     dest: /etc/nginx/modules-enabled/50-mod-http-passenger.conf
     state: link
@@ -42,16 +42,18 @@
   template:
     src: nginx.conf.j2
     dest: /etc/nginx/nginx.conf
+    mode: 0644
   notify: restart nginx
 
 - name: Configure passenger virtual host.
   template:
     src: passenger.j2
     dest: /etc/nginx/sites-available/passenger
+    mode: 0644
   notify: restart nginx
 
 - name: Ensure passenger virtual host is enabled.
-  file:
+  file:  # noqa 208
     src: /etc/nginx/sites-available/passenger
     dest: /etc/nginx/sites-enabled/passenger
     state: link
