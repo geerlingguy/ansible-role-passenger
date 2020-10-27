@@ -1,6 +1,6 @@
 # Ansible Role: Passenger
 
-[![Build Status](https://travis-ci.org/geerlingguy/ansible-role-passenger.svg?branch=master)](https://travis-ci.org/geerlingguy/ansible-role-passenger)
+[![Build Status](https://travis-ci.com/geerlingguy/ansible-role-passenger.svg?branch=master)](https://travis-ci.com/geerlingguy/ansible-role-passenger)
 
 Installs Passenger (with Nginx) on RedHat/CentOS (soon) or Debian/Ubuntu linux servers.
 
