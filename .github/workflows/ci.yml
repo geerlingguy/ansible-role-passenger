@@ -42,7 +42,6 @@ jobs:
       matrix:
         distro:
           - ubuntu2004
-          - ubuntu1804
 
     steps:
       - name: Check out the codebase.
