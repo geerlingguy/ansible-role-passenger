@@ -41,7 +41,7 @@ jobs:
     strategy:
       matrix:
         distro:
-          - ubuntu2004
+          - ubuntu2404
 
     steps:
       - name: Check out the codebase.
