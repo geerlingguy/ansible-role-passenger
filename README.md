@@ -1,6 +1,6 @@
 # Ansible Role: Passenger
 
-[![CI](https://github.com/geerlingguy/ansible-role-passenger/workflows/CI/badge.svg?event=push)](https://github.com/geerlingguy/ansible-role-passenger/actions?query=workflow%3ACI)
+[![CI](https://github.com/geerlingguy/ansible-role-passenger/actions/workflows/ci.yml/badge.svg)](https://github.com/geerlingguy/ansible-role-passenger/actions/workflows/ci.yml)
 
 Installs Passenger (with Nginx) on RedHat/CentOS (soon) or Debian/Ubuntu linux servers.
 
