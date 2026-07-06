@@ -9,14 +9,25 @@
   when: nginx_user is not defined
 
 # Passenger repository setup.
+- name: Add apt HTTPS and key management capabilities.
+  apt:
+    name:
+      - apt-transport-https
+      - dirmngr
+      - gpg
+    state: present
+
 - name: Add Passenger apt key.
   apt_key:
     keyserver: keyserver.ubuntu.com
     id: 561F9B9CAC40B2F7
     state: present
 
-- name: Add apt HTTPS capabilities.
-  apt: name=apt-transport-https state=present
+- name: Add current Passenger apt signing key.
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: D870AB033FB45BD1
+    state: present
 
 - name: Add Phusion apt repo.
   apt_repository:
